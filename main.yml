@@ -1,0 +1,17 @@
+name: CD
+
+on:
+  push:
+    branches: [ production ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Deploy to <your domain>
+      uses: appleboy/ssh-action@master
+      with:
+        username: <your username>
+        host: <your domain>
+        password: ${{ secrets.SSH_PASSWORD }}
+        script: 'cd /var/www/html && ./server_deploy.sh'
